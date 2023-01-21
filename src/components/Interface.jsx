@@ -24,6 +24,9 @@ const CalculatedInterface = styled.div`
   height: 100%;
   background: #00474b;
   border-radius: 15px;
+  @media (max-width: 920px) {
+    width: 100%;
+  }
 `;
 
 const Items = styled.div`

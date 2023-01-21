@@ -37,6 +37,10 @@ const Amount = styled.h2`
   letter-spacing: -1px;
   color: #26c2ae;
   margin: 0;
+  @media (max-width: 920px) {
+    font-size: 32px;
+    line-height: 47px;
+  }
 `;
 
 const Block = styled.div`

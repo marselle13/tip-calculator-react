@@ -31,12 +31,23 @@ const Wrapper = styled.div`
   border-radius: 25px;
   max-width: 920px;
   gap: 48px;
+  @media (max-width: 920px) {
+    width: 100%;
+  }
+  @media (max-width: 375px) {
+    width: 375px;
+  }
 `;
 
 const Card = styled.div`
   display: flex;
   gap: 40px;
   padding: 2rem 2rem 2rem 3rem;
+  @media (max-width: 920px) {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    gap: 32px;
+  }
 `;
 
 const CalculatorInterface = styled.div`
@@ -44,4 +55,7 @@ const CalculatorInterface = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  @media (max-width: 920px) {
+    width: 100%;
+  }
 `;

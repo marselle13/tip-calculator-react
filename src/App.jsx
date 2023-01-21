@@ -20,4 +20,8 @@ const ImgDiv = styled.div`
   display: flex;
   justify-content: center;
   margin: 10rem 0 5rem;
+
+  @media (max-width: 920px) {
+    margin: 50px 0 40px;
+  }
 `;

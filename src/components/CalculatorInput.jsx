@@ -45,4 +45,7 @@ export const InputStyle = styled.input`
   outline: none;
   color: #00474b;
   padding: 6px 20px 6px 34px;
+  @media (max-width: 375px) {
+    padding-right: 2px;
+  }
 `;

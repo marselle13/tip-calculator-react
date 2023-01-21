@@ -27,6 +27,7 @@ const TipInput = styled.div`
   padding: 6px 14px;
   color: #ffffff;
   cursor: pointer;
+  
 `;
 
 const Grid = styled.div`
@@ -35,6 +36,15 @@ const Grid = styled.div`
   grid-template-columns: 110px 110px 110px;
   grid-column-gap: 14px;
   grid-row-gap: 16px;
+  @media (max-width: 920px) {
+    grid-template-columns: 170px 170px;
+    height: 100%;
+    justify-content: center;
+  }
+
+  @media (max-width: 375px) {
+    grid-template-columns: 160px 160px;
+  }
 `;
 
 const CustomInput = styled(InputStyle)`
