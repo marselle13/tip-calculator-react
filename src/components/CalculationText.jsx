@@ -7,9 +7,9 @@ function CalculationText(props) {
         <Text>{props.text}</Text>
         <Person>/ person</Person>
       </div>
-      <div>
+      <AmountDiv>
         <Amount>${props.amount}</Amount>
-      </div>
+      </AmountDiv>
     </Block>
   );
 }
@@ -21,12 +21,17 @@ const Text = styled.h4`
   font-size: 16px;
   line-height: 24px;
   color: #fff;
+  white-space: nowrap;
 `;
 
 const Person = styled.span`
   font-size: 13px;
   line-height: 19px;
   color: #7f9d9f;
+  white-space: nowrap;
+`;
+const AmountDiv = styled.div`
+  overflow-x: auto;
 `;
 
 const Amount = styled.h2`

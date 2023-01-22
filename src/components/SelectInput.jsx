@@ -10,8 +10,15 @@ function SelectInput(props) {
   ];
 
   function selectButton(id) {
+    props.setCustomTipHandler("");
     props.setSelectedButton(id);
     props.setTipHandler(buttons[id - 1].value / 100);
+  }
+
+  function customHandler(e) {
+    if (e.target.value < 0) return;
+    props.setSelectedButton(null);
+    props.setCustomTipHandler(e.target.value);
   }
 
   return (
@@ -34,9 +41,9 @@ function SelectInput(props) {
         ))}
         <CustomInput
           placeholder="custom"
-          onClick={() => props.setSelectedButton(null)}
+          value={props.customTipHandler}
           type="number"
-          onChange={(e) => props.setTipHandler(+e.target.value / 100)}
+          onChange={customHandler}
         />
       </Grid>
     </div>

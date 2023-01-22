@@ -1,14 +1,28 @@
 import styled from "styled-components";
 import CalculationText from "./CalculationText";
-function Interface() {
+function Interface(props) {
   return (
     <CalculatedInterface>
       <Items>
-        <CalculationText text="Tip Amount" amount="4.27" />
-        <CalculationText text="Total" amount="32.79" />
+        <CalculationText
+          text="Tip Amount"
+          amount={
+            isFinite(props.tipAmount) && +props.tipAmount > 0
+              ? props.tipAmount
+              : "0.00"
+          }
+        />
+        <CalculationText
+          text="Total"
+          amount={
+            isFinite(props.tipTotal) && +props.tipTotal > 0
+              ? props.tipTotal
+              : "0.00"
+          }
+        />
       </Items>
       <ButtonDiv>
-        <Button>Reset</Button>
+        <Button onClick={props.onClick}>Reset</Button>
       </ButtonDiv>
     </CalculatedInterface>
   );
@@ -25,7 +39,10 @@ const CalculatedInterface = styled.div`
   background: #00474b;
   border-radius: 15px;
   @media (max-width: 920px) {
-    width: 100%;
+    width: 375px;
+  }
+  @media (max-width: 375px) {
+    width: 326px;
   }
 `;
 
@@ -52,4 +69,7 @@ const Button = styled.button`
   text-transform: uppercase;
   font-family: "SpaceMono";
   padding: 10px 0;
+  &:hover {
+    background: #9fe8df;
+  }
 `;

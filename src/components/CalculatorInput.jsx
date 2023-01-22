@@ -1,19 +1,35 @@
 import styled from "styled-components";
-
+import { useState } from "react";
 function CalculatorInput(props) {
+  const [isVisible, setIsVisible] = useState(false);
+
   const valueHandler = function (e) {
     if (props.label === "Bill") props.setBillHandler(+e.target.value);
 
     if (props.label.slice(-6) === "People")
-      props.setPeopleHandler(+e.target.value);
+      props.setPeopleHandler(e.target.value);
+
+    if (+e.target.value <= 0 && props.label.slice(-6) === "People") {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
   };
 
   return (
     <Input>
-      <Label htmlFor="InputStyle">{props.label}</Label>
+      <LabelDiv>
+        <Label htmlFor="InputStyle">{props.label}</Label>
+        {isVisible ? <Error>{props.error}</Error> : null}
+      </LabelDiv>
       <div>
         <Icon src={props.icon} alt="" />
-        <InputStyle type="number" onChange={valueHandler} />
+        <InputStyle
+          type="number"
+          onChange={valueHandler}
+          value={props.value}
+          outline={!isVisible ? "" : "2px solid #E17052"}
+        />
       </div>
     </Input>
   );
@@ -52,7 +68,21 @@ export const InputStyle = styled.input`
   outline: none;
   color: #00474b;
   padding: 6px 20px 6px 34px;
+  &:focus {
+    outline: ${(props) => props.outline || "2px solid #26c2ae"};
+  }
   @media (max-width: 375px) {
     padding-right: 2px;
   }
+`;
+
+const Error = styled.span`
+  font-size: 16px;
+  line-height: 24px;
+  color: #e17457;
+`;
+
+const LabelDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

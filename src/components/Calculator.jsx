@@ -8,9 +8,35 @@ import person from "../images/icon-person.svg";
 
 function Calculator() {
   const [selectedButton, setSelectedButton] = useState(3);
-  const [billHandler, setBillHandler] = useState(0);
-  const [peopleHandler, setPeopleHandler] = useState(0);
-  const [tipHandler, setTipHandler] = useState(0);
+  const [billHandler, setBillHandler] = useState("");
+  const [peopleHandler, setPeopleHandler] = useState("");
+  const [tipHandler, setTipHandler] = useState(0.15);
+  const [customTipHandler, setCustomTipHandler] = useState("");
+
+  const calculateTip = function () {
+    if (peopleHandler < 0) return;
+
+    const tip = selectedButton === null ? customTipHandler / 100 : +tipHandler;
+    return ((billHandler * tip) / peopleHandler).toFixed(2);
+  };
+
+  const calculateTotal = function () {
+    if (+tipAmount > 0) {
+      return (+tipAmount + billHandler / peopleHandler).toFixed(2);
+    }
+  };
+
+  const resetCalculator = function () {
+    setSelectedButton(3);
+    setBillHandler("");
+    setCustomTipHandler("");
+    setPeopleHandler("");
+    setTipHandler(0.15);
+  };
+
+  const tipAmount = calculateTip();
+  const tipTotal = calculateTotal();
+
   return (
     <Wrapper>
       <Card>
@@ -18,24 +44,32 @@ function Calculator() {
           <CalculatorInput
             label="Bill"
             icon={dollar}
-            billHandler={billHandler}
             setBillHandler={setBillHandler}
+            billHandler={billHandler}
+            value={billHandler}
           />
           <SelectInput
             selectedButton={selectedButton}
             setSelectedButton={setSelectedButton}
-            tipHandler={tipHandler}
             setTipHandler={setTipHandler}
+            customTipHandler={customTipHandler}
+            setCustomTipHandler={setCustomTipHandler}
           />
           <CalculatorInput
+            error="Can’t be zero"
             label="Number of People"
             icon={person}
-            peopleHandler={peopleHandler}
             setPeopleHandler={setPeopleHandler}
+            peopleHandler={peopleHandler}
+            value={peopleHandler}
           />
         </CalculatorInterface>
         <div>
-          <Interface />
+          <Interface
+            tipAmount={tipAmount}
+            tipTotal={tipTotal}
+            onClick={resetCalculator}
+          />
         </div>
       </Card>
     </Wrapper>
