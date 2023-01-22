@@ -32,6 +32,7 @@ const Person = styled.span`
 `;
 const AmountDiv = styled.div`
   overflow-x: auto;
+  margin-left: 1rem;
 `;
 
 const Amount = styled.h2`
