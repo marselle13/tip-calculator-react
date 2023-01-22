@@ -1,16 +1,43 @@
 import styled from "styled-components";
 import { Label, InputStyle } from "./CalculatorInput";
-function SelectInput() {
-  const values = [5, 10, 15, 25, 50];
+function SelectInput(props) {
+  const buttons = [
+    { id: 1, value: 5 },
+    { id: 2, value: 10 },
+    { id: 3, value: 15 },
+    { id: 4, value: 25 },
+    { id: 5, value: 50 },
+  ];
+
+  function selectButton(id) {
+    props.setSelectedButton(id);
+    props.setTipHandler(buttons[id - 1].value / 100);
+  }
 
   return (
     <div>
       <Label>Select Tip %</Label>
       <Grid>
-        {values.map((value) => (
-          <TipInput key={value}>{value}%</TipInput>
+        {buttons.map((button) => (
+          <TipInput
+            key={button.id}
+            onClick={() => selectButton(button.id)}
+            selectedBackground={
+              button.id === props.selectedButton ? "#26C2AE" : "#00474B;"
+            }
+            selectedColor={
+              button.id === props.selectedButton ? "#00474B" : "#FFF"
+            }
+          >
+            {button.value}%
+          </TipInput>
         ))}
-        <CustomInput placeholder="custom" />
+        <CustomInput
+          placeholder="custom"
+          onClick={() => props.setSelectedButton(null)}
+          type="number"
+          onChange={(e) => props.setTipHandler(+e.target.value / 100)}
+        />
       </Grid>
     </div>
   );
@@ -19,15 +46,14 @@ function SelectInput() {
 export default SelectInput;
 
 const TipInput = styled.div`
-  background:${(props) => (props.selected ? "#26C2AE" : "#00474b")}} ;
+  background: ${(props) => props.selectedBackground};
   border-radius: 5px;
   text-align: center;
   font-size: 24px;
   line-height: 36px;
   padding: 6px 14px;
-  color: #ffffff;
+  color: ${(props) => props.selectedColor};
   cursor: pointer;
-  
 `;
 
 const Grid = styled.div`

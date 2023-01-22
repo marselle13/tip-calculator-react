@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 import CalculatorInput from "./CalculatorInput";
 import SelectInput from "./SelectInput";
 import Interface from "./Interface";
@@ -6,13 +7,32 @@ import dollar from "../images/icon-dollar.svg";
 import person from "../images/icon-person.svg";
 
 function Calculator() {
+  const [selectedButton, setSelectedButton] = useState(3);
+  const [billHandler, setBillHandler] = useState(0);
+  const [peopleHandler, setPeopleHandler] = useState(0);
+  const [tipHandler, setTipHandler] = useState(0);
   return (
     <Wrapper>
       <Card>
         <CalculatorInterface>
-          <CalculatorInput label="Bill" icon={dollar} />
-          <SelectInput />
-          <CalculatorInput label="Number of People" icon={person} />
+          <CalculatorInput
+            label="Bill"
+            icon={dollar}
+            billHandler={billHandler}
+            setBillHandler={setBillHandler}
+          />
+          <SelectInput
+            selectedButton={selectedButton}
+            setSelectedButton={setSelectedButton}
+            tipHandler={tipHandler}
+            setTipHandler={setTipHandler}
+          />
+          <CalculatorInput
+            label="Number of People"
+            icon={person}
+            peopleHandler={peopleHandler}
+            setPeopleHandler={setPeopleHandler}
+          />
         </CalculatorInterface>
         <div>
           <Interface />

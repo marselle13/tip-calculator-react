@@ -1,12 +1,19 @@
 import styled from "styled-components";
 
 function CalculatorInput(props) {
+  const valueHandler = function (e) {
+    if (props.label === "Bill") props.setBillHandler(+e.target.value);
+
+    if (props.label.slice(-6) === "People")
+      props.setPeopleHandler(+e.target.value);
+  };
+
   return (
     <Input>
       <Label htmlFor="InputStyle">{props.label}</Label>
       <div>
         <Icon src={props.icon} alt="" />
-        <InputStyle type="text" />
+        <InputStyle type="number" onChange={valueHandler} />
       </div>
     </Input>
   );
